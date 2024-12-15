@@ -1,0 +1,47 @@
+Перший рівень
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+AddElementTag("microService", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="white", $legendText="micro service\neight sided")
+AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
+
+SHOW_PERSON_OUTLINE()
+
+
+Enterprise_Boundary(c1, "Enterprise") {
+    Person(customer, "Customer ")
+    Person(staff, "Warehous Staff ")
+    System(commerce, "E-Commerce", "Software System")
+}
+
+System_Ext(email, "Email System","Sendgrid", "Software System")
+
+customer ..> commerce : Placers Orders [https]
+staff ..> commerce : Dispatches Orders [https]
+commerce ..> email : Trigger emails [https]
+email ..> customer : Delivers emails [https]
+
+SHOW_LEGEND()
+@enduml
+
+Другий
+
+@startuml
+ !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml 
+AddElementTag("microService", $shape=EightSidedShape(), $bgColor="CornflowerBlue", $fontColor="white", $legendText="micro service\neight sided")
+ AddElementTag("storage", $shape=RoundedBoxShape(), $bgColor="lightSkyBlue", $fontColor="white")
+ SHOW_PERSON_OUTLINE() 
+Person(customer, "Customer ")
+ Person(staff, "Warehous Staff ")
+ System_Boundary(c1, "E-Commerce") {
+ Container(stock, "Stock Managment SPA", "Container: React", "Order fufillment, stock managment, order dispatch")
+ Container(store, "Store SPA", "Container: React", "E-Commerce Store") Container(api, "API", "Container: ASP.NET Core", "Backend") ContainerDb(customer_db, "Database", "Container: SQL Server", "Customers, Orders, Payments", $tags = "storage") }
+ System_Ext(email, "Email System","Sendgrid", "Software System") customer ..> store : Placers Orders [https] staff ..> stock : Dispatches Orders [https] stock ..> api : uses [https] store ..> api : uses [https] api ..> email : Trigger emails [https] api ..> customer_db : persists data [https] email ..> customer : Delivers emails [https] SHOW_LEGEND() @enduml
+
+
+
+
+
+
+
+

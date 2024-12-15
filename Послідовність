@@ -1,0 +1,24 @@
+@startuml
+actor User
+
+User -> "ATM Interface" : new session
+"ATM Interface" -> "Controls" : insert card
+"Controls" -> "ATM Interface" : print message: "Enter Password"
+User -> "ATM Interface" : enter password
+"ATM Interface" -> "Controls" : check validity
+"Controls" -> "ATM Interface" : validated
+"Controls" -> "ATM Interface" : select operation
+User -> "ATM Interface" : query account
+"ATM Interface" -> "Controls" : render operation
+"ATM Interface" -> "Controls" : query account request
+"Controls" -> "Transaction" : query account request
+"Transaction" -> "Controls" : query  request
+"Controls" -> "ATM Interface" : print message: "Take your card"
+"ATM Interface" -> User : remove card
+"Controls"-> "Print Unit" : request receipt
+"Print Unit"-> "Controls" : print receipt
+"Controls" -> "ATM Interface" :  print message: "Take Receipt"
+"Controls" -> "Print Unit" : print receipt
+ "ATM Interface"-> User : get receipt
+
+@enduml

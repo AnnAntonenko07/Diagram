@@ -1,0 +1,77 @@
+@startuml
+' Defining abstract class Primitive
+abstract class Primitive {
+  Rectangle boundingRectangle
+  Color color
+  bool filled
+  Primitive()
+}
+
+' Defining interfaces
+interface IDrawable {
+  void Draw()
+}
+
+interface IWritable {
+  void Write()
+}
+
+' Linking Primitive to its subclasses
+Primitive <|-- DrawableRectangle
+Primitive <|-- DrawableEllipse
+Primitive <|-- DrawableArc
+
+
+' Linking subclasses to interfaces
+DrawableRectangle --|> IDrawable
+DrawableRectangle --|> IWritable
+DrawableEllipse --|> IDrawable
+DrawableArc --|> IDrawable
+DrawableArc --|> IWritable
+DrawableBezier --|> IDrawable
+DrawableBezier --|> IWritable
+DrawableLine --|> IDrawable
+DrawableLine --|> IWritable
+
+' Defining classes
+class DrawableRectangle {
+  double Area()
+  void Draw()
+  void Write()
+  DrawableRectangle()
+}
+
+class DrawableEllipse {
+  double Area()
+  void Draw()
+  DrawableEllipse()
+}
+
+class DrawableArc {
+  float start
+  float end
+  void Draw()
+  void Write()
+  DrawableArc()
+}
+
+class DrawableBezier {
+  Color color
+  Point controlFirst
+  Point controlSecond
+  Point curveStart
+  Point curveEnd
+  void Draw()
+  void Write()
+  DrawableBezier()
+}
+
+class DrawableLine {
+  Color color
+  Point lineStart
+  Point lineEnd
+  void Draw()
+  void Write()
+  DrawableLine()
+}
+@enduml

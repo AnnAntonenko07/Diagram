@@ -1,0 +1,39 @@
+@startuml
+left to right direction
+
+actor "Waiter" as ac1
+actor "Patron" as ac2
+actor "Cashier" as ac3
+actor "Chef" as ac4
+
+rectangle SystemBoundary {
+    usecase "Order Food" as UC1
+    usecase "Order Wine" as UC2
+    usecase "Serve Food" as UC3
+    usecase "Cook Food" as UC4
+    usecase "Serve Wine" as UC5
+    usecase "Eat Food" as UC6
+    usecase "Drink Wine" as UC7
+    usecase "Pay for Food" as UC8
+    usecase "Pay for Wine" as UC9
+}
+
+ac1 --> UC1 : Receive order
+UC2 .> UC1 : <<extend>>
+
+ac1 --> UC3 : Serve food
+UC5 .> UC3 : <<extend>> {if wine ordered}
+
+ac4 --> UC1 : Confirm order
+ac4 --> UC4
+
+ac2 --> UC6 
+UC7 .> UC6 : <<extend>> {if wine served}
+ac2 --> UC1: place holder
+ac2 --> UC8 : Pay
+UC9 .> UC8 : <<extend>> {if wine consumed}
+
+ac1 --> UC8 : Facilitate payment
+ac3 --> UC8 : Accept payment
+
+@enduml

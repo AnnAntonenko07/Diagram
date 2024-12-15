@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+skinparam componentStyle uml1
+[ATM machine] as ATM
+[Customer console] as cc
+[Bank database] as bd
+[Employee console] as ec
+[Card reader] as cr
+[Web page] as wp
+[Client desktop] as cd
+interface " " as p 
+interface " " as po
+interface " " as poi
+interface " " as poin
+interface " " as point
+p - ATM : ATM transaction
+ATM - cc
+ATM .> bd
+bd - po : Account information
+cc-cr
+cc-wp
+ec-cd
+cr .>bd
+wp .>bd
+cd.>bd
+cr-poi : Web merchant transaction
+wp-poin : Online transaction
+cd-point : Client desktop transaction
+@enduml
